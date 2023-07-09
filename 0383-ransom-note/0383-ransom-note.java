@@ -6,15 +6,17 @@ class Solution {
         }
         for(int i=0;i<magazine.length();i++){
             if(map.containsKey(magazine.charAt(i))){
-                map.put(magazine.charAt(i),map.get(magazine.charAt(i))-1);
+                if(map.get(magazine.charAt(i))>1){
+                    map.put(magazine.charAt(i),map.get(magazine.charAt(i))-1);
+                }else{
+                    map.remove(magazine.charAt(i));
+                }
             }
         }
-        for(int i=0;i<ransomNote.length();i++){
-            if(map.get(ransomNote.charAt(i))>0){
-                return false;
-            }
+        if(map.isEmpty()){
+            return true;
         }
-             
-    return true;
+            return false;
+        
     }
 }
