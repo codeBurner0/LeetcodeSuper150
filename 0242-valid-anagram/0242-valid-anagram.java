@@ -3,16 +3,24 @@ class Solution {
         if(s.length()!=t.length()){
             return false;
         }
-        int res[]=new int[26];
+        HashMap<Character,Integer> map=new HashMap<>();
         for(int i=0;i<s.length();i++){
-            res[s.charAt(i)-'a']++;
-            res[t.charAt(i)-'a']--;
+            map.put(s.charAt(i),map.getOrDefault(s.charAt(i),0)+1);
         }
-        for(int val: res){
-            if(val!=0){
-                return false;
+        System.out.println(map);
+        for(int i=0;i<t.length();i++){
+            if(map.containsKey(t.charAt(i))){
+                if(map.get(t.charAt(i))>1){
+                    map.put(t.charAt(i),map.get(t.charAt(i))-1);
+                }else{
+                    map.remove(t.charAt(i));
+                }
             }
         }
-        return true;
+        System.out.println(map);
+        if(map.isEmpty()){
+            return true;
+        }
+        return false;
     }
 }
